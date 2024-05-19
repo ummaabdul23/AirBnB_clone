@@ -5,13 +5,21 @@ from datetime import datetime
 
 class BaseModel:
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
+        if kwargs:
+            for key, value in kwargs.items():
+                if key == "__class__":
+                    continue
+                if key in ["created_at", "updated_at"]:
+                    value  = datetime.fromisoformat(value)
+                    setattr(self, key, value)
+        else:
         # Generate a unique ID for each instance
-        self.id = str(uuid.uuid4())
+                self.id = str(uuid.uuid4())
         # Set the created_at attribute to the current date and time
-        self.created_at = datetime.now()
+                self.created_at = datetime.now()
         # Set the updated_at attribute to the current date and time
-        self.updated_at = datetime.now()
+                self.updated_at = datetime.now()
 
     def __str__(self):
         # Return a string representation of the instance
