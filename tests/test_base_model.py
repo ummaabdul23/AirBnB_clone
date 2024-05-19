@@ -1,11 +1,13 @@
 #!/usr/bin/python3
+import models
 import unittest
 from models.base_model import BaseModel
 from datetime import datetime
 import uuid
 
+
 class TestBaseModel(unittest.TestCase):
-    
+
     def setUp(self):
         """Setup test environment"""
         self.model = BaseModel()
@@ -42,11 +44,13 @@ class TestBaseModel(unittest.TestCase):
         model_dict = self.model.to_dict()
         self.assertEqual(model_dict["__class__"], "BaseModel")
         self.assertEqual(model_dict["id"], self.model.id)
-        self.assertEqual(model_dict["created_at"], self.model.created_at.isoformat())
-        self.assertEqual(model_dict["updated_at"], self.model.updated_at.isoformat())
+        self.assertEqual(model_dict["created_at"],
+                         self.model.created_at.isoformat())
+        self.assertEqual(model_dict["updated_at"],
+                         self.model.updated_at.isoformat())
         self.assertIsInstance(model_dict["created_at"], str)
         self.assertIsInstance(model_dict["updated_at"], str)
 
+
 if __name__ == '__main__':
     unittest.main()
-

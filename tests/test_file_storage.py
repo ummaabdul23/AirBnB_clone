@@ -1,9 +1,10 @@
 #!/usr/bin/python3
-
+import models
 import unittest
 from models.base_model import BaseModel
 from models import storage
 import os
+
 
 class TestFileStorage(unittest.TestCase):
 
@@ -39,6 +40,6 @@ class TestFileStorage(unittest.TestCase):
         storage.reload()
         self.assertIn(f"BaseModel.{self.model.id}", storage.all())
 
+
 if __name__ == '__main__':
     unittest.main()
-
